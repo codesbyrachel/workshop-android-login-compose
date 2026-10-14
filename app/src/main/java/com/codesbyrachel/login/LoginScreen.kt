@@ -19,6 +19,7 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -119,7 +120,24 @@ fun LoginScreen(modifier: Modifier = Modifier) {
                     )
                 }
 
-                // TODO: Desafio 2 - Adicionar OutlinedButton "Entrar como convidado" aqui
+                Spacer(modifier = Modifier.height(8.dp))
+                OutlinedButton(
+                    onClick = {
+                        Toast
+                            .makeText(context, "Entrando como convidado...", Toast.LENGTH_SHORT)
+                            .show()
+                    },
+                    modifier =
+                        Modifier
+                            .fillMaxWidth()
+                            .height(48.dp),
+                    shape = MaterialTheme.shapes.medium,
+                ) {
+                    Text(
+                        text = "Entrar como convidado",
+                        style = MaterialTheme.typography.titleMedium,
+                    )
+                }
             }
         }
 
