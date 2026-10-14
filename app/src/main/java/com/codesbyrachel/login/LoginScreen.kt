@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Lock
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.Button
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
@@ -37,7 +38,7 @@ fun LoginScreen(modifier: Modifier = Modifier) {
     var email by remember { mutableStateOf("") }
     val context = LocalContext.current
 
-    // TODO: Desafio 1 - Adicionar estado do Nome
+    var name by remember { mutableStateOf("") }
     // TODO: Desafio Plus - Adicionar estados da Senha e Visibilidade
 
     Column(
@@ -99,7 +100,19 @@ fun LoginScreen(modifier: Modifier = Modifier) {
                     shape = MaterialTheme.shapes.medium
                 )
 
-                // TODO: Desafio 1 - Adicionar campo de Nome aqui
+                OutlinedTextField(
+                    value = name,
+                    onValueChange = { name = it },
+                    label = { Text("Nome") },
+                    leadingIcon = {
+                        Icon(Icons.Default.Person, contentDescription = null)
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    shape = MaterialTheme.shapes.medium,
+                )
+
+                Spacer(modifier = Modifier.height(8.dp))
+
                 // TODO: Desafio Plus - Adicionar campo de Senha com olhinho aqui
 
                 Spacer(modifier = Modifier.height(24.dp))
