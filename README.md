@@ -41,3 +41,4 @@ A branch `main` contém a **estrutura inicial** desenvolvida junto durante a aul
 * **Kotlin**
 * **Jetpack Compose**
 * **Material 3**
+
