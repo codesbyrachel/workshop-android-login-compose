@@ -14,13 +14,19 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Lock
+import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Visibility
+import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material3.Button
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -29,6 +35,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
@@ -38,7 +46,10 @@ fun LoginScreen(modifier: Modifier = Modifier) {
     val context = LocalContext.current
 
     // TODO: Desafio 1 - Adicionar estado do Nome
+    var name by remember { mutableStateOf("") }
     // TODO: Desafio Plus - Adicionar estados da Senha e Visibilidade
+    var password by remember { mutableStateOf("") }
+    var passwordVisible by remember { mutableStateOf(false) }
 
     Column(
         modifier = modifier
@@ -98,9 +109,42 @@ fun LoginScreen(modifier: Modifier = Modifier) {
                     modifier = Modifier.fillMaxWidth(),
                     shape = MaterialTheme.shapes.medium
                 )
+                Spacer(modifier = Modifier.height(8.dp))
 
                 // TODO: Desafio 1 - Adicionar campo de Nome aqui
+                OutlinedTextField(
+                    value = name,
+                    onValueChange = { name = it },
+                    label = { Text("Nome") },
+                    leadingIcon = {
+                        Icon(Icons.Default.Person, contentDescription = null)
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    shape = MaterialTheme.shapes.medium,
+                )
+
+                Spacer(modifier = Modifier.height(8.dp))
+
                 // TODO: Desafio Plus - Adicionar campo de Senha com olhinho aqui
+                OutlinedTextField(
+                    value = password,
+                    onValueChange = { password = it },
+                    label = { Text("Senha") },
+                    leadingIcon = {
+                        Icon(Icons.Default.Lock, contentDescription = null)
+                    },
+                    trailingIcon = {
+                        IconButton(onClick = { passwordVisible = !passwordVisible }) {
+                            Icon(
+                                imageVector = if (passwordVisible) Icons.Default.Visibility else Icons.Default.VisibilityOff,
+                                contentDescription = null,
+                            )
+                        }
+                    },
+                    visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
+                    modifier = Modifier.fillMaxWidth(),
+                    shape = MaterialTheme.shapes.medium
+                )
 
                 Spacer(modifier = Modifier.height(24.dp))
 
@@ -120,10 +164,41 @@ fun LoginScreen(modifier: Modifier = Modifier) {
                 }
 
                 // TODO: Desafio 2 - Adicionar OutlinedButton "Entrar como convidado" aqui
+                Spacer(modifier = Modifier.height(8.dp))
+                OutlinedButton(
+                    onClick = {
+                        Toast
+                            .makeText(context, "Entrando como convidado...", Toast.LENGTH_SHORT)
+                            .show()
+                    },
+                    modifier =
+                        Modifier
+                            .fillMaxWidth()
+                            .height(48.dp),
+                    shape = MaterialTheme.shapes.medium,
+                ) {
+                    Text(
+                        text = "Entrar como convidado",
+                        style = MaterialTheme.typography.titleMedium,
+                    )
+                }
             }
         }
 
         // TODO: Desafio 3 - Adicionar TextButton "Não tem uma conta? Cadastre-se" aqui
+        Spacer(modifier = Modifier.height(16.dp))
+
+        TextButton(onClick = {
+            Toast
+                .makeText(context, "Navegando para cadastro...", Toast.LENGTH_SHORT)
+                .show()
+        }) {
+            Text(
+                text = "Não tem uma conta? Cadastre-se",
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.primary,
+            )
+        }
     }
 }
 
