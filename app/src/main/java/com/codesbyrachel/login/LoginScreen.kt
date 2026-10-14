@@ -21,6 +21,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -123,7 +124,19 @@ fun LoginScreen(modifier: Modifier = Modifier) {
             }
         }
 
-        // TODO: Desafio 3 - Adicionar TextButton "Não tem uma conta? Cadastre-se" aqui
+        Spacer(modifier = Modifier.height(16.dp))
+
+        TextButton(onClick = {
+            Toast
+                .makeText(context, "Navegando para cadastro...", Toast.LENGTH_SHORT)
+                .show()
+        }) {
+            Text(
+                text = "Não tem uma conta? Cadastre-se",
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.primary,
+            )
+        }
     }
 }
 
